@@ -11,3 +11,11 @@ type Weather = {
 interface Storage{
     getItem(key: 'city' |'coordinates'): string     // overrided just for this simple test project (don't repeat! :) )
 }
+
+
+
+type Task = {
+    title: string,
+    done: boolean,
+    view?: HTMLElement
+}
