@@ -4,19 +4,15 @@
 //TODO separate ui and fetches:
 
 
-/**
- * @type {HTMLImageElement}
- */
-const precipitationImage = document.querySelector('.precipitation');
-const temperatureTitle = document.querySelector('.temperature');
 
 
 
 /**
  * @param {GeolocationPosition} position
+ * @param {({ city, lat, lon }: { city: string; lat: number; lon: number }) => void} [callback]
  * @description get city and weather for it
  */
-export async function getCityAndWeather(position) {
+export async function getCity(position, callback) {
 
     const { latitude: lat, longitude: lon } = position.coords;
     const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ru`);
@@ -27,7 +23,11 @@ export async function getCityAndWeather(position) {
 
     document.querySelector('.city__name').textContent = city;
 
-    await bringCurrentWeather(lat, lon);
+    return city;
+
+    // callback({city, lat, lon})
+    
+    // await bringCurrentWeather(lat, lon);
 }
 
 
@@ -60,13 +60,13 @@ export async function bringCurrentWeather(lat, lon, callback) {
 
         globalThis['debug'] && console.log(current);
 
-        precipitationImage.src = `/image/${weatherIcon}.png`;
-        temperatureTitle.textContent = current.temperature_2m + '℃';
+        // precipitationImage.src = `/image/${weatherIcon}.png`;
+        // temperatureTitle.textContent = current.temperature_2m + '℃';
 
-        // callback({
-        //     temperature: current.temperature_2m, 
-        //     weather: weatherIcon
-        // })
+        callback({
+            temperature: current.temperature_2m, 
+            weather: weatherIcon
+        })
     });
 }
 
