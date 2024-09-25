@@ -3,8 +3,8 @@
 import { setBackgroundFrom } from "./features/background.js";
 import { tickTime } from "./features/timer.js";
 
-import './features/weather.js'
-import './features/tasks.js'
+import './features/weather/app.js'
+import './features/tasks/index.js'
 
 
 
