@@ -1,33 +1,34 @@
 //@ts-check
 
-import { getCity as bringCity, bringCurrentWeather } from "./brings.js";
-
-
-
-/**
- * @type {HTMLImageElement}
- */
-const precipitationImage = document.querySelector('.precipitation');
-const temperatureTitle = document.querySelector('.temperature');
+import { getCityAndWeather, bringCurrentWeather } from "./brings.js";
 
 
 let currentCity = localStorage.getItem('city');
 
 /// location and weather
 
-if (!currentCity) navigator.geolocation.getCurrentPosition(async pos => {
-    const city = await bringCity(pos);
-    bringCurrentWeather(pos.coords.latitude, pos.coords.longitude, applyWeather);
-})
+if (!currentCity) navigator.geolocation.getCurrentPosition(getCityAndWeather)
 else {
     document.querySelector('.city__name').textContent = currentCity;
     const { lat, lon } = JSON.parse(localStorage.getItem('coordinates'));
-    bringCurrentWeather(lat, lon, applyWeather);
+    bringCurrentWeather(lat, lon);
 }
 
 
-function applyWeather({ temperature, weather }) {
 
-    precipitationImage.src = `/image/${weather}.png`;
-    temperatureTitle.textContent = temperature + '℃';
-}
+
+
+
+
+
+
+
+
+
+
+
+// function applyWeather({ temperature, weather }) {
+
+//     precipitationImage.src = `/image/${weather}.png`;
+//     temperatureTitle.textContent = temperature + '℃';
+// }
