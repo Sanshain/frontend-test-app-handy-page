@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+
+/* time & date:  */
+
+#time {
+    font-size: 3em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+}
+
+#date {
+    color: azure;
+    margin-top: 1em;
+    font-size: medium;
+    opacity: .4;
+}
+
+
+
+/** geo: */
+
+.geo_position {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 5px solid lightblue;
+    border-radius: 100%;
+    margin-right: .6em;
+    bottom: .3em;
+}
+
+.geo_position::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin: 1px 0 0 -6px;
+    display: block;
+    content: '';
+    border: 6px solid transparent;
+    border-top: 10px solid lightblue;
+    border-bottom: none;
+}
+
+
+#weather {
+    position: absolute;
+    top: 0;
+    right: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* width: 18em; */
+}
+
+.precipitation {
+    height: 2em;
+    margin: 1em;
+}
+
+.city {
+    /* position: absolute; */
+    /* left: 1em;
+    bottom: 1em; */
+    /* top: 2em;
+    right: 12em; */
+    /* top: 5em;
+    right: 1.2em; */
+
+    color: azure;
+    opacity: .3;
+    font-size: small;
+    display: flex;
+    cursor: pointer;
+}
+
+.temperature {
+    font-size: small;
+    color: aliceblue;
+}
+
+
+
+/* tasks: */
+
+
+#tasks {
+    position: absolute;
+    bottom: 1em;
+    right: 2em;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    opacity: .7;
+    transition: .5s;
+}
+
+#tasks:hover{
+    opacity: 1;
+}
+
+
+:root {
+    --tasks_bg_color: white;
+}
+
+.task_list {
+    position: absolute;
+    visibility: hidden;
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    flex-direction: column;
+
+    bottom: 3.5em;
+    right: 1em;
+
+    opacity: 0;
+    min-width: 20em;
+    min-height: 5em;
+    background-color: var(--tasks_bg_color);
+    border-radius: .5em;
+    /* box-shadow: 0 0 5px lightsteelblue; */
+
+    /* padding-top: 2.5em; */
+    transition: .7s;
+    box-shadow: 0 0 15px white;
+}
+
+.task_list ul::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+
+
+.task_list::after {
+    content: '';
+    position: absolute;
+    right: 25px;
+    bottom: -20px;
+
+    /* Положение треугольника */
+
+    border: 10px solid transparent;
+    border-top: 10px solid var(--tasks_bg_color);
+}
+
+.task_list input {
+    margin: 1em;
+    width: 80%;
+    padding: .4em 1em;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+.task_list ul {
+    width: 100%;
+    list-style-type: none;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.task_list ul li {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: .5em;
+}
+
+.task_list ul input[type="checkbox"] {
+    width: 1em;
+    margin-left: 2em;
+
+    box-shadow: 0 0 15px gray;
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 2em;
+    vertical-align: sub;
+    cursor: pointer;
+}
+
+.task_list ul input[type="checkbox"]:checked {
+    box-shadow: 0 0 15px gray;
+}
+
+.task_list ul h4 {
+    display: inline-block;
+    margin-left: 1em;
+    vertical-align: text-top;
+    max-width: 20em;
+    font-weight: 500;
+}
+
+.task_list ul h4.done {
+    text-decoration: line-through;
+    opacity: .5;
+}
+
+.task_list ul .delete_task {
+    background: url(/image/icons/delete.png) no-repeat;
+    background-size: 80%;
+    --size: 1.5em;
+    height: var(--size);
+    width: var(--size);
+    /* display: inline-block; */
+    /* vertical-align: middle; */
+    position: absolute;
+    right: .75em;
+    top: 1em;
+    opacity: .05;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.task_list ul .delete_task:hover {
+    opacity: .25;
+    transform: scale(1.2);
+}
+
+.task_list .menu {
+    margin: 1em;
+    padding: .3em;
+    border-radius: 1em;
+    height: 1em;
+    width: 1em;
+    text-align: center;
+    cursor: pointer;
+    color: lightgray;
+    transition: .4s;
+    margin-right: .8em;
+    user-select: none;
+}
+
+.task_list .menu:hover,
+.task_list .menu:focus {
+    /* background-color: aliceblue; */
+    background-color: #eee;
+    color: cornflowerblue;
+    box-shadow: 0 0 5px #bbb;
+}
+
+/* .task_list .menu:focus+.sub_menu {
+    visibility: visible;
+} */
+
+.sub_menu {
+    position: absolute;
+    top: 3em;
+    right: 1em;
+    background-color: white;
+    visibility: hidden;
+
+    padding: .5em 1em;
+    box-shadow: 0 0 15px gray;
+    border-radius: .5em;
+    /* border-radius: .5em .4em .5em .5em; */
+    right: .57em;
+    top: 3.5em;
+    z-index: 1;
+}
+
+.sub_menu::after {
+    content: '';
+    position: absolute;
+    right: 7px;
+    top: -20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid white;
+    /* border-bottom: 10px solid var(--tasks_bg_color); */
+}
+
+.sub_menu::before {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    height: 2em;
+    width: 2em;
+    top: -2.5em;
+    right: 0em;
+}
+
+.sub_menu>* {
+    cursor: pointer;
+    padding-right: 1.5em;
+    opacity: .7;
+    font-weight: 500;
+    /* transition: .5s; */
+}
+
+.sub_menu>*:hover {
+    opacity: 1;
+}
+
+.sub_menu .delete_all:after {
+    content: '';
+    background: url(/image/icons/delete.png) no-repeat;
+    background-size: cover;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    right: -.5em;
+}
+
+.visible{
+    visibility: visible;
+}
