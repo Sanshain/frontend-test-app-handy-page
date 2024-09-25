@@ -13,22 +13,3 @@ else {
     const { lat, lon } = JSON.parse(localStorage.getItem('coordinates'));
     bringCurrentWeather(lat, lon);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function applyWeather({ temperature, weather }) {
-
-//     precipitationImage.src = `/image/${weather}.png`;
-//     temperatureTitle.textContent = temperature + '℃';
-// }

@@ -62,11 +62,6 @@ export async function bringCurrentWeather(lat, lon, callback) {
 
         precipitationImage.src = `/image/${weatherIcon}.png`;
         temperatureTitle.textContent = current.temperature_2m + '℃';
-
-        // callback({
-        //     temperature: current.temperature_2m, 
-        //     weather: weatherIcon
-        // })
     });
 }
 
