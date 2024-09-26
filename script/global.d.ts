@@ -8,8 +8,8 @@ type Weather = {
 }
 
 
-interface Storage{
-    getItem(key: 'city' |'coordinates'): string     // overrided just for this simple test project (don't repeat! :) )
+interface Storage {
+    getItem(key: 'city' | 'coordinates' | 'tasks_open'): string     // overrided just for this simple test project (don't repeat! :) )
 }
 
 

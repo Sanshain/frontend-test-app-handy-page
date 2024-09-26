@@ -1,7 +1,7 @@
 //@ts-check
 
 
-import { appendTaskItem } from "./interface.js";
+import { appendTaskItem, openTasksList } from "./interface.js";
 import { saveTasks, tasks } from "./storage.js";
 import { taskInput } from "./interface.js";
 
@@ -23,6 +23,8 @@ const tasksStore = new Proxy(tasks, { // (*)
     }
 });
 
+
+if (+localStorage.getItem('tasks_open')) openTasksList()
 
 
 /// EVENTS:

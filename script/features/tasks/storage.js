@@ -18,3 +18,10 @@ function getTasks() {
 export function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks.filter(Boolean)))
 }
+
+/**
+ * @param {boolean} isOpened
+ */
+export function saveOpenState(isOpened) {
+    localStorage.setItem('tasks_open', (+isOpened).toString())
+}

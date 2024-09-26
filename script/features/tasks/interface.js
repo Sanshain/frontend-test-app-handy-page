@@ -1,7 +1,7 @@
 //@ts-check
 
 import { applyElement } from "../../tools/dom.js";
-import { saveTasks, tasks } from "./storage.js";
+import { saveOpenState, saveTasks, tasks } from "./storage.js";
 
 
 
@@ -68,14 +68,15 @@ tasksMenu.onblur = () => setTimeout(() => subMenu.style.visibility = 'hidden', 1
 
 toggleTasksButton.onclick = () => {
 
-    if (!taskList.classList.contains('visible')) {
-        taskList.classList.toggle('visible')
-        setTimeout(() => { taskList.style.opacity = '.95' })
-        setTimeout(() => taskInput.focus(), 50)
-    } else {
+    const isOpen = taskList.classList.contains('visible')
+    
+    if (!isOpen) openTasksList();
+    else {
         taskList.style.opacity = '0'
         setTimeout(() => taskList.classList.toggle('visible'))
-    }
+    }    
+    
+    saveOpenState(!isOpen);
 }
 
 deleteDoneTasks.onclick = () => {
@@ -89,4 +90,10 @@ deleteDoneTasks.onclick = () => {
         }
         saveTasks()
     }
+}
+
+export function openTasksList() {
+    taskList.classList.toggle('visible');
+    setTimeout(() => { taskList.style.opacity = '.95'; });
+    setTimeout(() => taskInput.focus(), 50);
 }
