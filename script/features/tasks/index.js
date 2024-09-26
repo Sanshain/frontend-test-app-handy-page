@@ -34,7 +34,7 @@ if (+localStorage.getItem('tasks_open')) openTasksList()
 // taskInput.addEventListener('change', onPushTask)
 taskInput.onkeydown = e => {
     if (e.key == 'Enter') {
-        if (!taskInput.value) alert('Введите название задачи')
+        if (!taskInput.value) alert('Введите текст задачи')
         else {
             onPushTask(e)
         }
