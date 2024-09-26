@@ -60,7 +60,7 @@ export async function bringCurrentWeather(lat, lon, callback) {
 
         globalThis['debug'] && console.log(current);
 
-        precipitationImage.src = `/image/${weatherIcon}.png`;
+        precipitationImage.src = `./image/${weatherIcon}.png`;
         temperatureTitle.textContent = current.temperature_2m + '℃';
     });
 }
