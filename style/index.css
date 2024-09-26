@@ -214,7 +214,7 @@ body {
 }
 
 .task_list ul .delete_task {
-    background: url(./image/icons/delete.png) no-repeat;
+    background: url(./icons/delete.png) no-repeat;
     background-size: 80%;
     --size: 1.5em;
     height: var(--size);
