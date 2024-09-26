@@ -1,6 +1,9 @@
 //@ts-check
 
 
+//TODO separate ui and fetches:
+
+
 /**
  * @type {HTMLImageElement}
  */
@@ -9,26 +12,11 @@ const temperatureTitle = document.querySelector('.temperature');
 
 
 
-
-
-/// location and weather
-
-let currentCity = localStorage.getItem('city');
-
-if (!currentCity) navigator.geolocation.getCurrentPosition(getCityAndWeather)
-else {
-    document.querySelector('.city__name').textContent = currentCity;
-    const { lat, lon } = JSON.parse(localStorage.getItem('coordinates'));
-    bringCurrentWeather(lat, lon);
-}
-
-
-
 /**
  * @param {GeolocationPosition} position
  * @description get city and weather for it
  */
-async function getCityAndWeather(position) {
+export async function getCityAndWeather(position) {
 
     const { latitude: lat, longitude: lon } = position.coords;
     const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ru`);
@@ -46,9 +34,10 @@ async function getCityAndWeather(position) {
 /**
  * @param {number} lat
  * @param {number} lon
+ * @param {({ temperature, weather }: { temperature: number; weather: string; }) => void} [callback]
  * @description gets weather by position (fetches to https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=,)
  */
-async function bringCurrentWeather(lat, lon) {
+export async function bringCurrentWeather(lat, lon, callback) {
 
     const current = [
         "temperature_2m", "precipitation_probability", "precipitation",
@@ -71,7 +60,7 @@ async function bringCurrentWeather(lat, lon) {
 
         globalThis['debug'] && console.log(current);
 
-        precipitationImage.src = `/image/${weatherIcon}.png`;
+        precipitationImage.src = `./image/${weatherIcon}.png`;
         temperatureTitle.textContent = current.temperature_2m + '℃';
     });
 }
