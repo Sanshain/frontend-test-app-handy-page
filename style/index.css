@@ -310,7 +310,7 @@ body {
 
 .sub_menu .delete_all:after {
     content: '';
-    background: url(/image/icons/delete.png) no-repeat;
+    background: url(./icons/delete.png) no-repeat;
     background-size: cover;
     height: 1em;
     width: 1em;
