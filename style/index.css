@@ -100,6 +100,10 @@ body {
 
 /* tasks: */
 
+form{
+    margin: auto;
+    width: 100%;
+}
 
 #tasks {
     position: absolute;

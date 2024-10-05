@@ -29,13 +29,16 @@ if (+localStorage.getItem('tasks_open')) openTasksList()
 
 /// EVENTS:
 
+/** @type {HTMLFormElement} */
+const form = document.querySelector('form')
 
+// form.onsubmit = e => { onPushTask(e) ||  e.preventDefault() }
 
 // taskInput.addEventListener('change', onPushTask)
 taskInput.onkeydown = e => {
     if (e.key == 'Enter') {
         if (!taskInput.value) alert('Введите текст задачи')
-        else {
+        else {            
             onPushTask(e)
         }
     }
@@ -49,15 +52,38 @@ taskInput.onkeydown = e => {
  * @param {Event} e
  */
 function onPushTask(e) {
-    tasksStore.push({
-        title: taskInput.value,
+    
+    /**
+     * @type {Omit<Task, 'done'> | any} 
+     */    
+    const taskData = Object.fromEntries([...new FormData(form).entries()])      // .reduce((acc, [k, v]) => { acc[k] = v; return acc }, {})
+    const fullTaskData = {
+        ...taskData,
+        // title: taskInput.value,
+        // title: new FormData(form).get('new_task').toString(),
+        // title: form.elements['new_task'].value,
         done: false
-    });
+    }
+
+    tasksStore.push(new MyTask(fullTaskData));
     taskInput.value = ''
 }
 
 
 
+class MyTask{
+    /**
+     * @param {{title: string, done: boolean}} param
+     */
+    constructor({ title, done }) {
+        debugger
+        this.title = title;
+        this.done = done;
+    }
 
-
+    /**
+     * @type {HTMLElement}
+     */
+    view;
+}
 

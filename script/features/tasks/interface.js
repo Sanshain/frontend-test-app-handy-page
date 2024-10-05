@@ -34,7 +34,7 @@ export function appendTaskItem(task) {
     const deleteButton = applyElement(item, 'div', { className: 'delete_task' });
 
     checkbox.onchange = (e) => {
-
+        
         task.done = checkbox['checked'];
 
         localStorage.setItem('tasks', JSON.stringify(tasks.filter(Boolean)))
